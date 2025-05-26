@@ -13,7 +13,7 @@ int main()
 
     list.remove(49).remove(999999); 
 
-    std::cout << list;
+    //std::cout << list;
 
     list.clear();
     

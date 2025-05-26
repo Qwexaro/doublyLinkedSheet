@@ -7,7 +7,7 @@ Node::Node(int value) : data{ std::make_shared<int>(value) }, next{ nullptr }, p
 
 Node::~Node() 
 {
-    std::cout << "\nn" << *data << " destroyed\n";
+    //std::cout << "\nn" << *data << " destroyed\n";
 }
 
 int& Node::getData() 
@@ -44,7 +44,7 @@ List::List() : first{ nullptr }, last{ nullptr } {}
 
 List::~List() 
 {
-    clear(); std::cout << "List destroyed\n";
+    clear(); //std::cout << "List destroyed\n";
 }
 
 List& List::add(int value) 
