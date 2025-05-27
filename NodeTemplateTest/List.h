@@ -1,64 +1,66 @@
 #pragma once
 
 #include <iostream>
-//template <typename T>
+
+template <typename T>
 class Node
 {
-    std::shared_ptr<int> data;
-    std::shared_ptr<Node> next;
-//template <typename T>
-    std::shared_ptr<Node> prev;
+    std::shared_ptr<T> data;
+    std::shared_ptr<Node<T>> next;
+    
+    std::shared_ptr<Node<T>> prev;
 public:
 
-    Node(int value) : data{ std::make_shared<int>(value) }, next{ nullptr }, prev{ nullptr }{}
+    Node(T value) : data{ std::make_shared<T>(value) }, next{ nullptr }, prev{ nullptr } {}
 
     ~Node() {}
 
-    int& getData() { if (data) return *data; throw std::exception("Data is empty"); }
+    T& getData() { if (data) return *data; throw std::exception("Data is empty"); }
 
-    Node& setData(int value){ *data = value; return *this; }
+    Node<T>& setData(T value) { *data = value; return *this; }
 
-    std::shared_ptr<Node> getNext() const { return next; }
+    std::shared_ptr<Node<T>> getNext() const { return next; }
 
-    Node& setNext(std::shared_ptr<Node> _next) { this->next = _next; return *this; }
+    Node<T>& setNext(std::shared_ptr<Node<T>> _next) { this->next = _next; return *this; }
 
-    std::shared_ptr<Node> getPrev() const { return prev; }
+    std::shared_ptr<Node<T>> getPrev() const { return prev; }
 
-    Node& setPrev(std::shared_ptr<Node> _prev) { this->prev = _prev; return *this; }
+    Node<T>& setPrev(std::shared_ptr<Node<T>> _prev) { this->prev = _prev; return *this; }
 };
 
+template <typename T>
 class List
 {
-    std::shared_ptr<Node> first;
-    std::shared_ptr<Node> last;
+    std::shared_ptr<Node<T>> first;
+    std::shared_ptr<Node<T>> last;
 public:
-    List() : first { nullptr }, last{ nullptr } {}
+    List() : first{ nullptr }, last{ nullptr } {}
 
     ~List() { clear(); std::cout << "\nList destroyed"; }
 
-    List& add(int value)
+    List<T>& add(T value)
     {
-            std::shared_ptr<Node> new_node = std::make_shared<Node>(value);
+        std::shared_ptr<Node<T>> new_node = std::make_shared<Node<T>>(value);
 
-            if (!first)
-            {
-                first = last = new_node;
-            }
-            else
-            {
-                last->setNext(new_node);
-                new_node->setPrev(last);
-                last = new_node;
-            }
+        if (!first)
+        {
+            first = last = new_node;
+        }
+        else
+        {
+            last->setNext(new_node);
+            new_node->setPrev(last);
+            last = new_node;
+        }
 
-            return *this;
+        return *this;
     }
 
-    List& remove(unsigned int index)
+    List<T>& remove(unsigned int index)
     {
         if (!first) { std::cout << "Я дед инсайд (пустой)\n"; return *this; }
 
-        std::shared_ptr<Node> temp = first;
+        std::shared_ptr<Node<T>> temp = first;
 
         for (int i = 0; i < index && temp; i++)
         {
@@ -77,11 +79,11 @@ public:
         return *this;
     }
 
-    int& operator[](unsigned int index)
+    T& operator[](unsigned int index)
     {
         if (first)
         {
-            std::shared_ptr<Node> temp = first;
+            std::shared_ptr<Node<T>> temp = first;
             for (int i = 0; i < index; i++)
             {
                 if (temp)temp = temp->getNext();
@@ -89,12 +91,12 @@ public:
             }
             return temp->getData();
         }
-        else throw std::out_of_range("Ты куда?\n");
+        else throw std::out_of_range("Ты куда ?\n");
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const List& list)
+    friend std::ostream& operator<<(std::ostream& out, const List<T>& list)
     {
-        std::shared_ptr<Node> temp = list.first;
+        std::shared_ptr<Node<T>> temp = list.first;
         while (temp)
         {
             if (temp)
@@ -107,11 +109,11 @@ public:
         return out;
     }
 
-    List& clear()
+    List<T>& clear()
     {
         while (first)
         {
-            remove(0); // память нужно очищать.
+            remove(0); // паямть надо очищать.
         }
         last = nullptr;
 
