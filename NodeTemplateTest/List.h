@@ -7,7 +7,6 @@ class Node
 {
     std::shared_ptr<T> data;
     std::shared_ptr<Node<T>> next;
-    
     std::shared_ptr<Node<T>> prev;
 public:
 

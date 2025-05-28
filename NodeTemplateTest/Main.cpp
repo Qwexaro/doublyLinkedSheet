@@ -21,7 +21,7 @@ int main()
     double_list.remove(3);
 
     std::cout << int_list << str_list << double_list;
-
+        
     int_list.clear();
     str_list.clear();
     double_list.clear();
