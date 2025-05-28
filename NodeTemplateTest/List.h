@@ -113,7 +113,7 @@ public:
     {
         while (first)
         {
-            remove(0); // паямть надо очищать.
+            remove(0); // память надо очищать.
         }
         last = nullptr;
 

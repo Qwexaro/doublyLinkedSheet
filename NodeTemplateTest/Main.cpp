@@ -12,7 +12,7 @@ int main()
     
     int_list.remove(0).remove(3);
 
-    str_list.add("каждый").add("охотник").add("желает").add("знать").add("где").add("сидит").add("Фёдор");
+    str_list.add("Каждый").add("охотник").add("желает").add("знать").add("где").add("сидит").add("Фёдор");
 
     str_list.remove(2).remove(2).remove(2).remove(2);
 
